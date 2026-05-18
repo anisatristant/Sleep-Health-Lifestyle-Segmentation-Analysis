@@ -2,59 +2,43 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Scikit-learn](https://img.shields.io/badge/Machine-Learning-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Clustering](https://img.shields.io/badge/Algorithm-K--Means-green)](https://scikit-learn.org/stable/modules/clustering.html)
 
 ## 📌 Deskripsi Proyek
-Proyek ini menggunakan teknik **Unsupervised Learning** untuk mengidentifikasi segmen gaya hidup masyarakat berdasarkan kebiasaan sehari-hari dan dampaknya terhadap kualitas tidur. Dengan menggunakan **K-Means Clustering**, kita dapat membedakan pola perilaku antara kelompok yang memiliki kualitas tidur optimal dengan kelompok yang berisiko stres tinggi.
+Proyek ini bertujuan untuk mengidentifikasi segmen atau profil gaya hidup masyarakat berdasarkan pola perilaku sehari-hari dan dampaknya terhadap kesehatan tidur. Menggunakan algoritma **K-Means Clustering**, penelitian ini mengeksplorasi hubungan antara konsumsi kafein, paparan layar (*screen time*), aktivitas fisik, dan jam kerja terhadap kualitas tidur serta tingkat stres.
 
 ## 📂 Struktur Repositori
-Penyusunan file dilakukan secara modular untuk memudahkan navigasi:
-*   `data/`: Berisi dataset mentah (CSV).
-*   `notebooks/`: File Jupyter Notebook (.ipynb) berisi langkah-langkah analisis mulai dari EDA hingga Clustering.
-*   `images/`: Visualisasi hasil grafik yang dihasilkan dari analisis.
-*   `output/`: Hasil akhir segmentasi berupa daftar anggota per cluster.
+Proyek ini disusun secara modular untuk memudahkan pengelolaan data dan analisis:
+- **`data/`**: Berisi dataset mentah dalam format CSV.
+- **`notebooks/`**: File Jupyter Notebook (.ipynb) yang berisi seluruh alur kerja mulai dari pembersihan data hingga pemodelan.
+- **`images/`**: Kumpulan grafik hasil visualisasi analisis (untuk referensi visual).
+- **`output/`**: Daftar data individu yang telah diberi label cluster (hasil segmentasi).
 
----
+## 📊 Hasil Analisis dan Temuan Utama
+Analisis ini menghasilkan 6 segmen gaya hidup yang berbeda secara signifikan. Berikut adalah poin-poin temuan utamanya:
 
-## 📊 Visualisasi & Insights
+### 1. Optimalitas Segmen
+Berdasarkan pengujian menggunakan **Elbow Method** dan **Silhouette Score**, ditemukan bahwa pembagian populasi ke dalam **6 Cluster** memberikan hasil yang paling seimbang dan representatif bagi dataset ini.
 
-Berikut adalah beberapa poin kunci dari hasil analisis yang diambil dari folder `images/`:
+### 2. Karakteristik Cluster (Profil Gaya Hidup)
+Setiap kelompok memiliki pola perilaku yang unik:
+*   **Cluster Sehat & Aktif:** Memiliki rata-rata langkah kaki di atas 8.000/hari, durasi olahraga rutin, dan konsumsi kafein yang minimal. Kelompok ini memiliki skor kualitas tidur tertinggi.
+*   **Cluster Berisiko (High Screen Time):** Ditandai dengan penggunaan gadget di atas 60 menit sebelum tidur. Kelompok ini secara konsisten memiliki skor stres yang lebih tinggi.
+*   **Cluster Pekerja Keras (High Workload):** Memiliki jam kerja harian yang tinggi. Meskipun aktif bergerak, kelompok ini seringkali memiliki durasi tidur yang lebih pendek namun efisiensi tidur yang stabil.
 
-### 1. Penentuan Jumlah Cluster (Elbow Method)
-<img src="images/grafik elbow.png" width="600">
+### 3. Dampak Terhadap Kesehatan
+*   **Kualitas Tidur:** Terdapat korelasi positif yang kuat antara aktivitas fisik harian dengan skor kualitas tidur.
+*   **Tingkat Stres:** Paparan layar sebelum tidur dan konsumsi alkohol/kafein yang berlebihan di malam hari menjadi pemicu utama rendahnya perasaan segar saat bangun (*felt rested*).
 
-Menggunakan *KElbowVisualizer* untuk menentukan jumlah kelompok paling optimal. Berdasarkan grafik, ditemukan bahwa **K=6** adalah titik siku (*elbow*) terbaik.
+## 🛠️ Metodologi & Teknologi
+- **Algoritma:** K-Means Clustering (Unsupervised Learning).
+- **Preprocessing:** Standardisasi fitur menggunakan `StandardScaler` dan Reduksi Dimensi dengan `PCA`.
+- **Library Utama:** `Pandas`, `NumPy`, `Scikit-Learn`, `Seaborn`, `Matplotlib`, dan `Yellowbrick`.
 
-### 2. Segmentasi Spasial (PCA)
-<img src="images/pca.png" width="600">
+## 🚀 Cara Menjalankan Proyek
+1. Clone repositori ini ke komputer Anda.
+2. Install library yang diperlukan:
+   ```bash
+   pip install pandas scikit-learn seaborn matplotlib yellowbrick plotly
 
-Visualisasi sebaran data dalam ruang 2D setelah dilakukan reduksi dimensi menggunakan PCA untuk melihat seberapa baik cluster terpisah.
-
-### 3. Profil Gaya Hidup (Radar Chart)
-<img src="images/radar chart profil gaya hidup.png" width="600">
-
-Setiap cluster memiliki karakteristik unik. Radar chart di bawah menunjukkan perbedaan dominan antara konsumsi kafein, langkah kaki, dan jam kerja antar cluster.
-
-### 4. Dampak Terhadap Kesehatan Tidur
-<img src="images/dampak gaya hidup cluster.png" width="600">
-
-Analisis akhir menunjukkan bagaimana setiap gaya hidup cluster memengaruhi kualitas tidur dan tingkat stres.
-
----
-
-## 🛠️ Metodologi & Fitur
-- **Fitur yang Digunakan:** Kafein, Alkohol, *Screen Time*, Langkah Kaki, Olahraga, Jam Kerja, dan Status Shift.
-- **Preprocessing:** Standardisasi skala data menggunakan `StandardScaler`.
-- **Evaluasi:** Menggunakan *Silhouette Score* dan *Elbow Method*.
-- **Tools:** `pandas`, `seaborn`, `scikit-learn`, `yellowbrick`, `plotly`.
-
-## 🚀 Cara Penggunaan
-1. Clone repositori ini.
-2. Pastikan library sudah terinstall (`pip install pandas scikit-learn seaborn yellowbrick`).
-3. Jalankan notebook di folder `notebooks/Sleep_Health_Lifestyle_Segmentation.ipynb`.
-4. Hasil segmentasi tiap individu dapat ditemukan di folder `output/`.
-
-## 🏁 Kesimpulan
-Hasil clustering memberikan gambaran jelas bahwa **aktivitas fisik (steps)** dan **pembatasan screen time** adalah faktor pembeda utama bagi kelompok yang memiliki kualitas tidur terbaik. Wawasan ini dapat digunakan untuk memberikan rekomendasi gaya hidup sehat yang dipersonalisasi.
-
----
-© 2025 [Annisa Tristanti]
+© 2026 [annisatristant]
